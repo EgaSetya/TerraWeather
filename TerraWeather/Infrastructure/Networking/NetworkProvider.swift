@@ -7,6 +7,7 @@
 
 import Foundation
 
+import Alamofire
 import Moya
 
 public struct NetworkProvider<Target> where Target: TargetType {
@@ -76,11 +77,12 @@ public struct NetworkProvider<Target> where Target: TargetType {
     }
     
     private func isOffline(error: MoyaError) -> Bool {
-        switch (error as NSError).code {
-        case NSURLErrorCannotConnectToHost, NSURLErrorNotConnectedToInternet:
+        if let alamofireError = error.errorUserInfo["NSUnderlyingError"] as? Alamofire.AFError,
+           let underlyingError = alamofireError.underlyingError as NSError?,
+           [NSURLErrorNotConnectedToInternet, NSURLErrorDataNotAllowed].contains(underlyingError.code) {
             return true
-        default:
-            return false
         }
+        
+        return false
     }
 }

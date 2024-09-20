@@ -12,5 +12,5 @@ struct CitiesResponse: Codable {
 struct City: Codable {
     let id, name, altName: String
     let latitude, longitude: Double
-    let provinceID: String
+    let provinceId: String
 }

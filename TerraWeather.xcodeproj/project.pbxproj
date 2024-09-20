@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4A4D2812C9D64140045A35E /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4D2802C9D64140045A35E /* UIColor+HexString.swift */; };
+		E4A4D2842C9D6D0D0045A35E /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = E4A4D2832C9D6D0D0045A35E /* iOSDropDown */; };
+		E4A4D2862C9D82360045A35E /* NSObject+Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4D2852C9D82360045A35E /* NSObject+Storable.swift */; };
+		E4A4D2892C9DB1FC0045A35E /* PopUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4D2882C9DB1FC0045A35E /* PopUpAlertViewController.swift */; };
+		E4A4D28B2C9DC69D0045A35E /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4D28A2C9DC69D0045A35E /* String+Validation.swift */; };
+		E4A4D28D2C9DD0140045A35E /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A4D28C2C9DD0140045A35E /* UIViewController+ActivityIndicator.swift */; };
 		E4E5B70F2C9C71AB00FEFFC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5B70E2C9C71AB00FEFFC6 /* AppDelegate.swift */; };
 		E4E5B7112C9C71AB00FEFFC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5B7102C9C71AB00FEFFC6 /* SceneDelegate.swift */; };
 		E4E5B7132C9C71AB00FEFFC6 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E5B7122C9C71AB00FEFFC6 /* HomepageViewController.swift */; };
@@ -33,6 +39,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E4A4D2802C9D64140045A35E /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
+		E4A4D2852C9D82360045A35E /* NSObject+Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Storable.swift"; sourceTree = "<group>"; };
+		E4A4D2882C9DB1FC0045A35E /* PopUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertViewController.swift; sourceTree = "<group>"; };
+		E4A4D28A2C9DC69D0045A35E /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
+		E4A4D28C2C9DD0140045A35E /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		E4E5B70B2C9C71AB00FEFFC6 /* TerraWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerraWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E5B70E2C9C71AB00FEFFC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4E5B7102C9C71AB00FEFFC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +75,7 @@
 				E4E5B7362C9C7E9B00FEFFC6 /* RxMoya in Frameworks */,
 				E4E5B7342C9C7E9B00FEFFC6 /* ReactiveMoya in Frameworks */,
 				E4E5B7392C9C7ED000FEFFC6 /* SnapKit in Frameworks */,
+				E4A4D2842C9D6D0D0045A35E /* iOSDropDown in Frameworks */,
 				E4E5B73B2C9C7ED000FEFFC6 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +83,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4A4D27F2C9D63FA0045A35E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4D2802C9D64140045A35E /* UIColor+HexString.swift */,
+				E4A4D2852C9D82360045A35E /* NSObject+Storable.swift */,
+				E4A4D28A2C9DC69D0045A35E /* String+Validation.swift */,
+				E4A4D28C2C9DD0140045A35E /* UIViewController+ActivityIndicator.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		E4A4D2872C9DB04A0045A35E /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				E4A4D2882C9DB1FC0045A35E /* PopUpAlertViewController.swift */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
 		E4E5B7022C9C71AB00FEFFC6 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +121,7 @@
 		E4E5B70D2C9C71AB00FEFFC6 /* TerraWeather */ = {
 			isa = PBXGroup;
 			children = (
+				E4A4D27F2C9D63FA0045A35E /* Helper */,
 				E4E5B7592C9D597900FEFFC6 /* Application */,
 				E4E5B75A2C9D599C00FEFFC6 /* Infrastructure */,
 				E4E5B7402C9D176900FEFFC6 /* Data */,
@@ -121,6 +153,7 @@
 		E4E5B7242C9C736600FEFFC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E4A4D2872C9DB04A0045A35E /* Commons */,
 				E4E5B7252C9C73C300FEFFC6 /* Homepage */,
 				E4E5B7292C9C749700FEFFC6 /* MainCoordinator.swift */,
 			);
@@ -255,6 +288,7 @@
 				E4E5B7352C9C7E9B00FEFFC6 /* RxMoya */,
 				E4E5B7382C9C7ED000FEFFC6 /* SnapKit */,
 				E4E5B73A2C9C7ED000FEFFC6 /* SnapKit-Dynamic */,
+				E4A4D2832C9D6D0D0045A35E /* iOSDropDown */,
 			);
 			productName = TerraWeather;
 			productReference = E4E5B70B2C9C71AB00FEFFC6 /* TerraWeather.app */;
@@ -287,6 +321,7 @@
 			packageReferences = (
 				E4E5B72E2C9C7E9B00FEFFC6 /* XCRemoteSwiftPackageReference "Moya" */,
 				E4E5B7372C9C7ED000FEFFC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E4A4D2822C9D6D0D0045A35E /* XCRemoteSwiftPackageReference "iOSDropDown" */,
 			);
 			productRefGroup = E4E5B70C2C9C71AB00FEFFC6 /* Products */;
 			projectDirPath = "";
@@ -314,16 +349,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4A4D2892C9DB1FC0045A35E /* PopUpAlertViewController.swift in Sources */,
 				E4E5B73D2C9C801D00FEFFC6 /* NetworkProvider.swift in Sources */,
 				E4E5B73F2C9C828100FEFFC6 /* NetworkError.swift in Sources */,
 				E4E5B7552C9D205000FEFFC6 /* DefaultLocationRepository.swift in Sources */,
 				E4E5B72C2C9C74E600FEFFC6 /* HomepageDependencyInjectionContainer.swift in Sources */,
+				E4A4D28D2C9DD0140045A35E /* UIViewController+ActivityIndicator.swift in Sources */,
 				E4E5B7442C9D17A100FEFFC6 /* Province.swift in Sources */,
 				E4E5B7132C9C71AB00FEFFC6 /* HomepageViewController.swift in Sources */,
+				E4A4D2812C9D64140045A35E /* UIColor+HexString.swift in Sources */,
 				E4E5B74E2C9D19AF00FEFFC6 /* LocationTargetType.swift in Sources */,
 				E4E5B70F2C9C71AB00FEFFC6 /* AppDelegate.swift in Sources */,
 				E4E5B7482C9D185F00FEFFC6 /* LocationRepository.swift in Sources */,
 				E4E5B74A2C9D18DF00FEFFC6 /* City.swift in Sources */,
+				E4A4D28B2C9DC69D0045A35E /* String+Validation.swift in Sources */,
+				E4A4D2862C9D82360045A35E /* NSObject+Storable.swift in Sources */,
 				E4E5B7582C9D416700FEFFC6 /* HomepageViewModel.swift in Sources */,
 				E4E5B7282C9C741C00FEFFC6 /* HomepageCoordinator.swift in Sources */,
 				E4E5B72A2C9C749700FEFFC6 /* MainCoordinator.swift in Sources */,
@@ -474,12 +514,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P55Q8LM5PD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TerraWeather/Resources/Info.plist;
+				INFOPLIST_FILE = TerraWeather/Application/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -502,12 +543,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P55Q8LM5PD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TerraWeather/Resources/Info.plist;
+				INFOPLIST_FILE = TerraWeather/Application/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,6 +587,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E4A4D2822C9D6D0D0045A35E /* XCRemoteSwiftPackageReference "iOSDropDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jriosdev/iOSDropDown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 		E4E5B72E2C9C7E9B00FEFFC6 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -564,6 +614,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E4A4D2832C9D6D0D0045A35E /* iOSDropDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A4D2822C9D6D0D0045A35E /* XCRemoteSwiftPackageReference "iOSDropDown" */;
+			productName = iOSDropDown;
+		};
 		E4E5B72F2C9C7E9B00FEFFC6 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E4E5B72E2C9C7E9B00FEFFC6 /* XCRemoteSwiftPackageReference "Moya" */;

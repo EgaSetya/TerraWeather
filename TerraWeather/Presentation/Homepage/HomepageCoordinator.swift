@@ -30,7 +30,10 @@ final class DefaultHomepageCoordinator: HomepageCoordinator {
     }
     
     func start() {
-        let actions = HomepageActions(showWeatherDetail: showWeatherDetail)
+        let actions = HomepageActions(
+            showWeatherDetail: showWeatherDetail,
+            showErrorAlert: showErrorAlert
+        )
         
         let viewController = dependencies.createHomepageViewController(actions: actions)
         navigationController.pushViewController(viewController, animated: true)
@@ -38,5 +41,13 @@ final class DefaultHomepageCoordinator: HomepageCoordinator {
     
     private func showWeatherDetail() {
         print("Navigate to weather detail page")
+    }
+    
+    private func showErrorAlert(_ type: PopupAlertType, _ retryDidTap: (() -> Void)?) {
+        let viewController = PopupAlertViewController(type: type, retryDidTap: retryDidTap)
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalTransitionStyle = .crossDissolve
+        
+        navigationController.present(viewController, animated: true)
     }
 }

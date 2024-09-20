@@ -29,7 +29,7 @@ final class DefaultLocationRepository: LocationRepository {
         do {
             // Make the network request using the refactored request function
             let response = try await NetworkProvider<LocationTargetType>()
-                .request(.getProvinces, CitiesResponse.self)
+                .request(.getCities, CitiesResponse.self)
             
             // Assuming ProvincesResponse has a property `provinces` that contains the array of provinces
             return .success(response.data)
