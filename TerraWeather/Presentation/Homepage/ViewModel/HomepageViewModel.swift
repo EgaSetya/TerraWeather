@@ -7,6 +7,12 @@
 
 import Combine
 
+struct WeatherDetailPayload {
+    let username: String
+    let city: String
+    let payload: WeatherPayload
+}
+
 protocol HomepageViewModel: HomepageViewModelInput, HomepageViewModelOuput {}
 
 protocol HomepageViewModelInput {
@@ -14,6 +20,7 @@ protocol HomepageViewModelInput {
     
     func viewWillAppear()
     func refresh()
+    func didChangeUsername(with username: String)
     func didSelectProvince(with id: Int)
     func didSelectCity(with id: Int)
 }
@@ -26,16 +33,19 @@ protocol HomepageViewModelOuput {
     var provinceIds: [Int] { get }
     var cityNames: [String] { get }
     var cityIds: [Int] { get }
+    var selectedWeatherItemViewModel: WeatherDetailPayload { get }
     
     func validateFields(username: String?, province: String?, city: String?) -> (Bool, String?)
 }
 
+// MARK: DefaultHomepageViewModel
 final class DefaultHomepageViewModel: HomepageViewModel {
     var viewState: HomepageViewState = .idle
     
     var cityNames: [String] = []
     var cityIds: [Int] = []
     
+    private var username = ""
     private var provinces: [Province] = []
     private var cities: [City] = []
     private var selectedCity: City?
@@ -54,12 +64,7 @@ final class DefaultHomepageViewModel: HomepageViewModel {
         case .success(let provinces):
             self.provinces = provinces
         case .failure(let failure):
-            if failure == NetworkError.Offline {
-                updateViewState(.connectionError(message: failure.errorDescription ?? ""))
-                break
-            }
-            
-            updateViewState(.error(message: failure.errorDescription ?? ""))
+            handleRequestError(failure)
         }
     }
     
@@ -70,12 +75,7 @@ final class DefaultHomepageViewModel: HomepageViewModel {
         case .success(let cities):
             self.cities = cities
         case .failure(let failure):
-            if failure == NetworkError.Offline {
-                updateViewState(.connectionError(message: failure.errorDescription ?? ""))
-                break
-            }
-            
-            updateViewState(.error(message: failure.errorDescription ?? ""))
+            handleRequestError(failure)
         }
     }
     
@@ -94,6 +94,15 @@ final class DefaultHomepageViewModel: HomepageViewModel {
         viewState = newState
         _shouldRefresh.send()
     }
+    
+    private func handleRequestError(_ failure: NetworkError) {
+        if failure == NetworkError.Offline {
+            updateViewState(.connectionError(message: failure.errorDescription ?? ""))
+            return
+        }
+        
+        updateViewState(.error(message: failure.errorDescription ?? ""))
+    }
 }
 
 // MARK: HomepageViewModelInput
@@ -104,6 +113,10 @@ extension DefaultHomepageViewModel {
     
     func refresh() {
         getLocationData()
+    }
+    
+    func didChangeUsername(with username: String) {
+        self.username = username
     }
     
     func didSelectProvince(with id: Int) {
@@ -133,6 +146,14 @@ extension DefaultHomepageViewModel {
         provinces.compactMap { Int($0.id) ?? 0 }
     }
     
+    var selectedWeatherItemViewModel: WeatherDetailPayload {
+        .init(
+            username: username, 
+            city: selectedCity?.name ?? "",
+            payload: WeatherPayload(lat: selectedCity?.latitude ?? 0.0, long: selectedCity?.longitude ?? 0.0)
+        )
+    }
+    
     func validateFields(username: String?, province: String?, city: String?) -> (Bool, String?) {
         guard let username = username?.trimmingCharacters(in: .whitespacesAndNewlines), !username.isEmpty else {
             return (false, "You need to fill all fields!")
@@ -146,8 +167,8 @@ extension DefaultHomepageViewModel {
             return (false, "You need to fill all fields!")
         }
 
-        if username.count <= 3 {
-            return (false, "Username must be more than 3 characters!")
+        if username.count < 3 {
+            return (false, "Username must be more than 2 characters!")
         }
 
         return (true, nil)

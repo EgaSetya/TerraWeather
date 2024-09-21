@@ -39,8 +39,10 @@ final class DefaultHomepageCoordinator: HomepageCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    private func showWeatherDetail() {
-        print("Navigate to weather detail page")
+    private func showWeatherDetail(_ weatherDetailPayload: WeatherDetailPayload) {
+        let weatherDIContainer = WeatherDependencyInjectionContainer(navigationController: navigationController, weatherDetailPayload: weatherDetailPayload)
+        let weatherFlowCoordinator = weatherDIContainer.provideHomageCoordinator()
+        weatherFlowCoordinator.start()
     }
     
     private func showErrorAlert(_ type: PopupAlertType, _ retryDidTap: (() -> Void)?) {

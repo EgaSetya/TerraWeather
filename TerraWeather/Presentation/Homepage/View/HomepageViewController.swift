@@ -21,7 +21,7 @@ enum HomepageViewState: Equatable {
 }
 
 struct HomepageActions {
-    let showWeatherDetail: () -> Void
+    let showWeatherDetail: (_ selectedWeatherItem: WeatherDetailPayload) -> Void
     let showErrorAlert: (_ type: PopupAlertType, _ retryDidTap: (() -> Void)?) -> Void
 }
 
@@ -184,6 +184,7 @@ final class HomepageViewController: UIViewController {
     }
     
     private func addTarget() {
+        usernameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         checkWeatherButton.addTarget(self, action: #selector(checkWeatherButtonTapped), for: .touchUpInside)
     }
     
@@ -202,27 +203,37 @@ final class HomepageViewController: UIViewController {
             showActivityIndicator()
         case .dataRetrieved:
             refreshProvinceDropDown()
+            hideActivityIndicator()
         case .provinceSelected:
             refreshCityDropDown()
+            hideActivityIndicator()
         case .error(let message):
-            actions.showErrorAlert(.commonError(message: message)) { [weak self] in
-                guard let self else {
-                    return
-                }
-                
-                viewModel.refresh()
-            }
+            handleError(message)
+            hideActivityIndicator()
         case .connectionError(let message):
-            actions.showErrorAlert(.connectionError(message: message)) { [weak self] in
-                guard let self else {
-                    return
-                }
-                
-                viewModel.refresh()
-            }
+            handleConnectionError(message)
+            hideActivityIndicator()
         }
-        
-        hideActivityIndicator()
+    }
+    
+    private func handleError(_ message: String) {
+        actions.showErrorAlert(.commonError(message: message)) { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            viewModel.refresh()
+        }
+    }
+    
+    private func handleConnectionError(_ message: String) {
+        actions.showErrorAlert(.connectionError(message: message)) { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            viewModel.refresh()
+        }
     }
     
     private func refreshProvinceDropDown() {
@@ -245,12 +256,16 @@ final class HomepageViewController: UIViewController {
         cityDropDown.backgroundColor = .gray.withAlphaComponent(0.75)
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        viewModel.didChangeUsername(with: textField.text ?? "")
+    }
+    
     @objc func checkWeatherButtonTapped() {
         let validationResult = viewModel.validateFields(username: usernameTextField.text, province: provinceDropDown.text, city: cityDropDown.text)
         let textValidation: (isValid: Bool, errorMessage: String?) = validationResult
         
         if textValidation.isValid {
-            actions.showWeatherDetail()
+            actions.showWeatherDetail(viewModel.selectedWeatherItemViewModel)
         } else {
             actions.showErrorAlert(.validationError(message: textValidation.errorMessage ?? ""), nil)
         }
