@@ -119,7 +119,7 @@ class GreetingHeaderView: UIView {
         }
 
         cityLabel.text = viewModel.city
-        temperatureLabel.text = "\(Int(viewModel.temperature))°"
+        temperatureLabel.text = "\(Int(viewModel.temperature))° C"
         weatherDescriptionLabel.text = viewModel.weatherDescription
     }
 }

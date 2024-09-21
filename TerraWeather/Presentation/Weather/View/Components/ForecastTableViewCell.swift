@@ -11,8 +11,18 @@ import Kingfisher
 import SnapKit
 
 class ForecastTableViewCell: UITableViewCell {
-    
     static let identifier = "ForecastTableViewCell"
+    
+    private lazy var cardContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        
+        return view
+    }()
     
     private lazy var dayLabel: UILabel = {
         let label = UILabel()
@@ -37,7 +47,8 @@ class ForecastTableViewCell: UITableViewCell {
     
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         
         return label
     }()
@@ -56,17 +67,25 @@ class ForecastTableViewCell: UITableViewCell {
         dayLabel.text = viewModel.day
         iconImageView.kf.setImage(with: viewModel.iconURL)
         descriptionLabel.text = viewModel.weatherDescription
-        temperatureLabel.text = "\(viewModel.temperature)°"
+        temperatureLabel.text = "\(viewModel.temperature)° C"
     }
     
     private func setupLayout() {
-        contentView.addSubview(dayLabel)
+        backgroundColor = .clear
+        
+        contentView.addSubview(cardContainerView)
+        cardContainerView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().offset(10)
+            make.bottom.right.equalToSuperview().inset(10)
+        }
+        
+        cardContainerView.addSubview(dayLabel)
         dayLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(16)
         }
         
-        contentView.addSubview(iconImageView)
+        cardContainerView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
             make.top.equalTo(dayLabel.snp.bottom).offset(10)
             make.bottom.equalToSuperview().inset(10)
@@ -74,16 +93,16 @@ class ForecastTableViewCell: UITableViewCell {
             make.width.height.equalTo(80)
         }
         
-        contentView.addSubview(descriptionLabel)
+        cardContainerView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(iconImageView.snp.trailing).offset(8)
             make.centerY.equalTo(iconImageView)
         }
         
-        contentView.addSubview(temperatureLabel)
+        cardContainerView.addSubview(temperatureLabel)
         temperatureLabel.snp.makeConstraints { make in
             make.leading.greaterThanOrEqualTo(descriptionLabel.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().offset(-16)
+            make.trailing.equalToSuperview().inset(24)
             make.centerY.equalTo(descriptionLabel)
         }
     }

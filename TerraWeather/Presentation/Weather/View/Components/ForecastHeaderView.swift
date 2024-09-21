@@ -40,12 +40,10 @@ class ForecastHeaderView: UIView {
     }
     
     private func setupLayout() {
-        backgroundColor = .systemBackground
-        
         addSubview(calendarImageView)
         calendarImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview().inset(8)
+            make.top.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
             make.width.height.equalTo(24)
         }

@@ -145,9 +145,9 @@ final class DefaultWeatherViewModel: WeatherViewModel {
             let dayName = dateFormatter.string(from: date).uppercased()
             
             if isToday {
-                return "TODAY - \(timeString)"
+                return "TODAY (\(timeString))"
             } else {
-                return "\(dayName) - \(timeString)"
+                return "\(dayName) (\(timeString))"
             }
     }
     

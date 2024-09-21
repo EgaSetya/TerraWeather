@@ -24,6 +24,7 @@ struct WeatherActions {
 final class WeatherViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
